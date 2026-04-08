@@ -1,0 +1,110 @@
+TABLE_NAME	ORDINAL_POSITION	COLUMN_NAME	COLUMN_TYPE	IS_NULLABLE	COLUMN_DEFAULT	COLUMN_KEY	EXTRA
+dsubindicador	1	id_subindicador	bigint(20) unsigned	NO	<NULL>	PRI	
+dsubindicador	2	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+dsubindicador	3	nome_subindicador	varchar(150)	NO	<NULL>		
+dsubindicador	4	descricao	varchar(255)	YES	<NULL>		
+dsubindicador	5	ordem_exibicao	smallint(5) unsigned	YES	<NULL>		
+dsubindicador	6	ativo_sn	tinyint(1)	NO	1		
+dsubindicador	7	origem_carga	varchar(50)	YES	<NULL>		
+dsubindicador	8	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+dsubindicador	9	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+dindicador	1	id_indicador	bigint(20) unsigned	NO	<NULL>	PRI	
+dindicador	2	id_familia	bigint(20) unsigned	NO	<NULL>	MUL	
+dindicador	3	id_tipo_indicador	varchar(30)	NO	<NULL>	MUL	
+dindicador	4	nome_indicador	varchar(150)	NO	<NULL>	MUL	
+dindicador	5	descricao	varchar(255)	YES	<NULL>		
+dindicador	6	possui_subindicador_sn	tinyint(1)	NO	0		
+dindicador	7	ordem_exibicao	smallint(5) unsigned	YES	<NULL>		
+dindicador	8	ativo_sn	tinyint(1)	NO	1		
+dindicador	9	origem_carga	varchar(50)	YES	<NULL>		
+dindicador	10	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+dindicador	11	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+fmeta	1	id_meta	bigint(20) unsigned	NO	<NULL>	PRI	auto_increment
+fmeta	2	id_periodo	varchar(20)	NO	<NULL>	MUL	
+fmeta	3	funcional	char(7)	NO	<NULL>	MUL	
+fmeta	4	juncao_ag	char(4)	YES	<NULL>	MUL	
+fmeta	5	juncao_gr	char(4)	YES	<NULL>	MUL	
+fmeta	6	juncao_dr	char(4)	YES	<NULL>	MUL	
+fmeta	7	segmento	varchar(20)	NO	<NULL>	MUL	
+fmeta	8	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+fmeta	9	valor_meta	decimal(19,4)	NO	0.0000		
+fmeta	10	ativo_sn	tinyint(1)	NO	1		
+fmeta	11	origem_carga	varchar(50)	YES	<NULL>		
+fmeta	12	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+fmeta	13	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+frealizado	1	id_producao	bigint(20) unsigned	NO	<NULL>	PRI	auto_increment
+frealizado	2	id_periodo	varchar(20)	NO	<NULL>	MUL	
+frealizado	3	funcional	char(7)	NO	<NULL>	MUL	
+frealizado	4	juncao_ag	char(4)	YES	<NULL>	MUL	
+frealizado	5	juncao_gr	char(4)	YES	<NULL>	MUL	
+frealizado	6	juncao_dr	char(4)	YES	<NULL>	MUL	
+frealizado	7	segmento	varchar(20)	NO	<NULL>	MUL	
+frealizado	8	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+frealizado	9	id_subindicador	bigint(20) unsigned	NO	0		
+frealizado	10	valor_realizado	decimal(19,4)	NO	0.0000		
+frealizado	11	ativo_sn	tinyint(1)	NO	1		
+frealizado	12	origem_carga	varchar(50)	YES	<NULL>		
+frealizado	13	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+frealizado	14	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+fdetalhe	1	id_detalhe	bigint(20) unsigned	NO	<NULL>	PRI	auto_increment
+fdetalhe	2	id_periodo	varchar(20)	NO	<NULL>		
+fdetalhe	3	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+fdetalhe	4	id_subindicador	bigint(20) unsigned	NO	0		
+fdetalhe	5	funcional	char(7)	NO	<NULL>	MUL	
+fdetalhe	6	juncao_ag	char(4)	YES	<NULL>	MUL	
+fdetalhe	7	juncao_gr	char(4)	YES	<NULL>	MUL	
+fdetalhe	8	juncao_dr	char(4)	YES	<NULL>	MUL	
+fdetalhe	9	segmento	varchar(20)	NO	<NULL>	MUL	
+fdetalhe	10	id_transacao	varchar(50)	YES	<NULL>	MUL	
+fdetalhe	11	numero_contrato	varchar(40)	NO	<NULL>	MUL	
+fdetalhe	12	conta	char(7)	YES	<NULL>		
+fdetalhe	13	canal_venda	varchar(50)	YES	<NULL>		
+fdetalhe	14	data_transacao	date	NO	<NULL>	MUL	
+fdetalhe	15	status_transacao	varchar(50)	YES	<NULL>		
+fdetalhe	16	observacao	varchar(500)	YES	<NULL>		
+fdetalhe	17	cnpj	char(15)	NO	<NULL>	MUL	
+fdetalhe	18	nome_cliente	varchar(200)	NO	<NULL>		
+fdetalhe	19	valor_realizado	decimal(19,4)	NO	0.0000		
+fdetalhe	20	ativo_sn	tinyint(1)	NO	1		
+fdetalhe	21	origem_carga	varchar(50)	YES	<NULL>		
+fdetalhe	22	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+fdetalhe	23	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+findicadorperiodo	1	id_config_indicador_periodo	bigint(20) unsigned	NO	<NULL>	PRI	auto_increment
+findicadorperiodo	2	id_periodo	varchar(20)	NO	<NULL>	MUL	
+findicadorperiodo	3	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+findicadorperiodo	4	peso	decimal(9,4)	NO	0.0000		
+findicadorperiodo	5	ordem_exibicao	smallint(5) unsigned	YES	<NULL>		
+findicadorperiodo	6	ativo_sn	tinyint(1)	NO	1		
+findicadorperiodo	7	origem_carga	varchar(50)	YES	<NULL>		
+findicadorperiodo	8	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+findicadorperiodo	9	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+fvariavel	1	id_variavel	bigint(20) unsigned	NO	<NULL>	PRI	auto_increment
+fvariavel	2	id_periodo	varchar(20)	NO	<NULL>	MUL	
+fvariavel	3	funcional	char(7)	NO	<NULL>	MUL	
+fvariavel	4	juncao_ag	char(4)	YES	<NULL>	MUL	
+fvariavel	5	juncao_gr	char(4)	YES	<NULL>	MUL	
+fvariavel	6	juncao_dr	char(4)	YES	<NULL>	MUL	
+fvariavel	7	segmento	varchar(20)	NO	<NULL>	MUL	
+fvariavel	8	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+fvariavel	9	variavel_meta	decimal(19,4)	NO	0.0000		
+fvariavel	10	variavel_realizada	decimal(19,4)	NO	0.0000		
+fvariavel	11	data_realizado	date	NO	<NULL>	MUL	
+fvariavel	12	ativo_sn	tinyint(1)	NO	1		
+fvariavel	13	origem_carga	varchar(50)	YES	<NULL>		
+fvariavel	14	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+fvariavel	15	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP
+fpontos	1	id_ponto	bigint(20) unsigned	NO	<NULL>	PRI	auto_increment
+fpontos	2	id_periodo	varchar(20)	NO	<NULL>	MUL	
+fpontos	3	funcional	char(7)	NO	<NULL>	MUL	
+fpontos	4	juncao_ag	char(4)	YES	<NULL>	MUL	
+fpontos	5	juncao_gr	char(4)	YES	<NULL>	MUL	
+fpontos	6	juncao_dr	char(4)	YES	<NULL>	MUL	
+fpontos	7	segmento	varchar(20)	NO	<NULL>	MUL	
+fpontos	8	id_indicador	bigint(20) unsigned	NO	<NULL>	MUL	
+fpontos	9	pontos_meta	decimal(19,4)	NO	0.0000		
+fpontos	10	pontos_realizado	decimal(19,4)	NO	0.0000		
+fpontos	11	data_realizado	date	NO	<NULL>	MUL	
+fpontos	12	ativo_sn	tinyint(1)	NO	1		
+fpontos	13	origem_carga	varchar(50)	YES	<NULL>		
+fpontos	14	dt_inclusao	timestamp	NO	CURRENT_TIMESTAMP		
+fpontos	15	dt_atualizacao	timestamp	NO	CURRENT_TIMESTAMP		on update CURRENT_TIMESTAMP

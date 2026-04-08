@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo POBJ - Dashboard de Teste</title>
+    <link rel="stylesheet" href="assets/css/app.css">
+    <noscript><style>.global-loading-overlay{display:none !important;}</style></noscript>
+</head>
+<body class="is-booting">
+    <header class="topbar" role="banner">
+        <nav id="main-navigation" class="topbar__left" aria-label="Navegacao principal">
+            <a href="index.php?page=pobj-dashboard&amp;periodo=2026T2" class="brand">
+                <img class="brand__logo" src="assets/img/logo-bradesco-white.svg" alt="Bradesco">
+            </a>
+        </nav>
+
+        <nav class="topbar__right" aria-label="Menu do usuario">
+            <div class="userbox" data-userbox>
+                <button class="userbox__trigger" id="btn-user-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="user-menu" aria-label="Menu do usuario: Elaine Departamento" data-userbox-trigger>
+                    <span class="userbox__avatar">ED</span>
+                    <span class="userbox__identity">
+                        <span class="userbox__name">Elaine</span>
+                    </span>
+                    <span class="userbox__chevron" aria-hidden="true"></span>
+                </button>
+
+                <div class="userbox__menu" id="user-menu" hidden data-userbox-menu>
+                    <div class="userbox__menu-header">
+                        <span class="userbox__menu-title">Links uteis</span>
+                    </div>
+
+                    <div class="userbox__menu-section">
+                        <button class="userbox__menu-item" type="button" data-userbox-dismiss>Portal PJ</button>
+
+                        <div class="userbox__submenu">
+                            <button class="userbox__menu-item userbox__menu-item--has-sub" type="button" aria-expanded="false" aria-controls="user-submenu-manuais" data-userbox-submenu-trigger>
+                                <span>Manuais</span>
+                                <span class="userbox__submenu-chevron" aria-hidden="true"></span>
+                            </button>
+
+                            <div class="userbox__submenu-list" id="user-submenu-manuais" hidden data-userbox-submenu>
+                                <button class="userbox__menu-item" type="button" data-userbox-dismiss>Manual do POBJ</button>
+                                <button class="userbox__menu-item" type="button" data-userbox-dismiss>Manual do Omega</button>
+                            </div>
+                        </div>
+
+                        <button class="userbox__menu-item" type="button" data-userbox-dismiss>Mapao de Oportunidades</button>
+                        <button class="userbox__menu-item" type="button" data-userbox-dismiss>Omega</button>
+                        <button class="userbox__menu-item" type="button" data-userbox-dismiss>EncantaBra</button>
+                    </div>
+                    <div class="userbox__divider"></div>
+                    <button class="userbox__menu-item userbox__menu-item--logout" type="button" data-userbox-dismiss>
+                        <span class="userbox__logout-icon" aria-hidden="true"></span>
+                        <span>Sair</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="app-shell">
+        <main id="main-content" class="main-content" aria-label="Area principal da tela Resumo">
+            <section class="summary-filters-section" aria-label="Filtros da tela Resumo">
+        <div class="filters-card">
+        <header class="filters-card__header">
+            <div>
+                <h1 class="filters-card__title">POBJ Produções</h1>
+                <p class="filters-card__subtitle">Acompanhe dados atualizados de performance.</p>
+            </div>
+        </header>
+
+        <form class="filters-form" method="get" action="index.php">
+            <input type="hidden" name="page" value="pobj-dashboard">
+            <input type="hidden" name="periodo" value="2026T2">
+            <input type="hidden" name="tab" value="resumo">
+            <input type="hidden" name="advanced_filters" value="open" data-filters-state>
+
+            <div class="filters-grid filters-grid--top">
+                <div class="filter-field">
+                    <label class="filter-field__label" for="filter-segmento">Segmento</label>
+                    <select id="filter-segmento" class="filter-field__control" name="segmento" data-filter-cascade>
+                        <option value="">Todos</option><option value="DIGITAL">DIGITAL - Digital</option><option value="NEGOCIOS">NEGOCIOS - Negócios</option>                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label class="filter-field__label" for="filter-diretoria">Diretoria</label>
+                    <select id="filter-diretoria" class="filter-field__control" name="diretoria" data-filter-cascade>
+                        <option value="">Todas</option><option value="3101">3101 - Diretoria Norte</option><option value="3201">3201 - Diretoria Sul</option>                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label class="filter-field__label" for="filter-regional">Regional</label>
+                    <select id="filter-regional" class="filter-field__control" name="regional" data-filter-cascade>
+                        <option value="">Todas</option><option value="2101">2101 - Regional Capital</option><option value="2201">2201 - Regional Costa</option>                    </select>
+                </div>
+
+                <div class="filters-actions">
+                    <button class="filters-button filters-button--primary" type="submit">Filtrar</button>
+                    <a class="filters-button filters-button--ghost" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;tab=resumo&amp;advanced_filters=open" data-preserve-filters-state>Limpar filtros</a>
+                </div>
+            </div>
+
+            <div class="filters-toggle-row">
+                <button class="filters-advanced-toggle is-open" type="button" aria-expanded="true" aria-controls="advanced-filters" data-filters-toggle>
+                    Fechar filtros avançados                </button>
+            </div>
+
+            <div class="filters-advanced-shell" id="advanced-filters" data-filters-shell>
+                <div class="filters-advanced" data-filters-advanced>
+                    <div class="filters-grid filters-grid--advanced">
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-agencia">Agência</label>
+                        <select id="filter-agencia" class="filter-field__control" name="agencia" data-filter-cascade>
+                            <option value="">Todas</option><option value="1101">1101 - Agencia Centro</option><option value="1102">1102 - Agencia Jardim</option><option value="1201">1201 - Agencia Litoral</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-gerente-gestao">Gerente de gestão</label>
+                        <select id="filter-gerente-gestao" class="filter-field__control" name="gerente_gestao" data-filter-cascade>
+                            <option value="">Todos</option><option value="6000002">6000002 - Davi Agencia Jardim</option><option value="6000001">6000001 - Lara Agencia Centro</option><option value="6000003">6000003 - Nina Agencia Litoral</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-gerente">Gerente</label>
+                        <select id="filter-gerente" class="filter-field__control" name="gerente" data-filter-cascade>
+                            <option value="">Todos</option><option value="4000001">4000001 - Bruno GC Centro</option><option value="4000002">4000002 - Carla GC Jardim</option><option value="4000003">4000003 - Diego GC Litoral</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-familia">Família</label>
+                        <select id="filter-familia" class="filter-field__control" name="familia" data-filter-cascade>
+                            <option value="">Selecione...</option><option value="1">Credito</option><option value="2">Relacionamento</option><option value="3">Seguros</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-indicadores">Indicadores</label>
+                        <select id="filter-indicadores" class="filter-field__control" name="indicadores" data-filter-cascade>
+                            <option value="">Selecione...</option><option value="101">Credito Total</option><option value="102">Capital de Giro</option><option value="201">Giro de Carteira</option><option value="301">Seguro Vida</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-subindicador">Subindicador</label>
+                        <select id="filter-subindicador" class="filter-field__control" name="subindicador">
+                            <option value="">Selecione...</option><option value="2101">Base da carteira</option><option value="2102">Clientes com contato</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-status-indicadores">Status dos indicadores</label>
+                        <select id="filter-status-indicadores" class="filter-field__control" name="status_indicadores">
+                            <option value="">Todos</option><option value="ATINGIDO">Atingido</option><option value="NAO_ATINGIDO">Nao atingido</option>                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label class="filter-field__label" for="filter-visao-acumulada">Visão acumulada</label>
+                        <select id="filter-visao-acumulada" class="filter-field__control" name="visao_acumulada">
+                                                            <option value="MENSAL" selected>Mensal</option>
+                                                    </select>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </form>
+    </div>
+</section>            <section class="summary-tabs-section" aria-label="Navegação da tela Resumo">
+    <div class="summary-tabs-shell">
+        <nav class="summary-tabs" aria-label="Abas do módulo POBJ">
+                                            <a class="summary-tabs__item is-active" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;advanced_filters=open&amp;visao_acumulada=MENSAL&amp;tab=resumo" data-preserve-filters-state>
+                    <span class="summary-tabs__icon" aria-hidden="true"><i data-lucide="layout-dashboard"></i></span>
+                    <span class="summary-tabs__label">Resumo</span>
+                </a>
+                                            <a class="summary-tabs__item" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;advanced_filters=open&amp;visao_acumulada=MENSAL&amp;tab=detalhamento" data-preserve-filters-state>
+                    <span class="summary-tabs__icon" aria-hidden="true"><i data-lucide="list-tree"></i></span>
+                    <span class="summary-tabs__label">Detalhamento</span>
+                </a>
+                                            <a class="summary-tabs__item" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;advanced_filters=open&amp;visao_acumulada=MENSAL&amp;tab=rankings" data-preserve-filters-state>
+                    <span class="summary-tabs__icon" aria-hidden="true"><i data-lucide="trophy"></i></span>
+                    <span class="summary-tabs__label">Rankings</span>
+                </a>
+                                            <a class="summary-tabs__item" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;advanced_filters=open&amp;visao_acumulada=MENSAL&amp;tab=visao-executiva" data-preserve-filters-state>
+                    <span class="summary-tabs__icon" aria-hidden="true"><i data-lucide="chart-column"></i></span>
+                    <span class="summary-tabs__label">Visão executiva</span>
+                </a>
+                                            <a class="summary-tabs__item" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;advanced_filters=open&amp;visao_acumulada=MENSAL&amp;tab=simuladores" data-preserve-filters-state>
+                    <span class="summary-tabs__icon" aria-hidden="true"><i data-lucide="calculator"></i></span>
+                    <span class="summary-tabs__label">Simuladores</span>
+                </a>
+                                            <a class="summary-tabs__item" href="index.php?page=pobj-dashboard&amp;periodo=2026T2&amp;advanced_filters=open&amp;visao_acumulada=MENSAL&amp;tab=campanhas" data-preserve-filters-state>
+                    <span class="summary-tabs__icon" aria-hidden="true"><i data-lucide="megaphone"></i></span>
+                    <span class="summary-tabs__label">Campanhas</span>
+                </a>
+                    </nav>
+
+        <div class="summary-tabs__meta">
+            <span class="summary-tabs__period-label">
+                                    <span class="summary-tabs__period-copy">De <strong>01/04/2026</strong> até <strong>07/04/2026</strong></span>
+                            </span>
+            <div class="summary-period-picker" data-period-picker>
+                <button class="summary-tabs__meta-button" type="button" aria-label="Alterar data do período" aria-expanded="false" data-period-trigger>
+                    <i data-lucide="chevron-down" aria-hidden="true"></i>
+                    <span>Alterar data</span>
+                </button>
+
+                <div class="summary-period-picker__popover" hidden data-period-popover>
+                    <form class="summary-period-picker__form" method="get" action="index.php" data-period-form data-period-options="[{&quot;id&quot;:&quot;2026T2&quot;,&quot;start&quot;:&quot;2026-04-01&quot;,&quot;end&quot;:&quot;2026-04-07&quot;},{&quot;id&quot;:&quot;2026T1&quot;,&quot;start&quot;:&quot;2026-01-01&quot;,&quot;end&quot;:&quot;2026-03-31&quot;}]">
+                                                                                                                                        <input type="hidden" name="advanced_filters" value="open">
+                                                                                <input type="hidden" name="visao_acumulada" value="MENSAL">
+                                                                                <input type="hidden" name="tab" value="resumo">
+                        
+                        <input type="hidden" name="page" value="pobj-dashboard">
+                        <input type="hidden" name="periodo" value="2026T2" data-period-id>
+
+                        <div class="summary-period-picker__header">Alterar data</div>
+
+                        <div class="summary-period-picker__fields">
+                            <label class="summary-period-picker__field">
+                                <input type="date" name="period_start" value="2026-04-01" max="2026-04-07" min="2026-01-01" data-period-start>
+                            </label>
+
+                            <label class="summary-period-picker__field">
+                                <input type="date" name="period_end" value="2026-04-07" max="2026-04-07" min="2026-01-01" data-period-end>
+                            </label>
+                        </div>
+
+                        <div class="summary-period-picker__actions">
+                            <button class="summary-period-picker__button summary-period-picker__button--ghost" type="button" data-period-cancel>Cancelar</button>
+                            <button class="summary-period-picker__button summary-period-picker__button--primary" type="submit">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>            <section class="resumo-mode" data-resumo-mode-root data-default-mode="cards" aria-label="Alternar visão do resumo">
+    <div class="resumo-mode__toggle segmented" role="group" aria-label="Alterar visão do resumo">
+        <button type="button" class="seg-btn is-active" data-resumo-mode-button data-mode="cards" aria-pressed="true">
+            Visão por cards
+        </button>
+        <button type="button" class="seg-btn" data-resumo-mode-button data-mode="legacy" aria-pressed="false">
+            Visão clássica
+        </button>
+    </div>
+</section>            <section class="summary-kpi-section" aria-label="Indicadores de resumo" data-resumo-pane="cards">
+    <div class="summary-kpi-grid">
+                    <article class="summary-kpi-card" style="--card-delay: 0ms; --bar-delay: 180ms;">
+                <div class="summary-kpi-card__main">
+                    <span class="summary-kpi-card__icon" aria-hidden="true">
+                        <i data-lucide="list-check"></i>
+                    </span>
+
+                    <div class="summary-kpi-card__text">
+                        <span class="summary-kpi-card__label">
+                            Indicadores                                                    </span>
+
+                        <div class="summary-kpi-card__stats">
+                            <span class="summary-kpi-card__stat">Atg: <strong>0</strong></span>
+                            <span class="summary-kpi-card__stat">Total: <strong>4</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-kpi__hitbar summary-kpi__hitbar--low" role="progressbar" aria-valuenow="0.0" aria-valuemin="0" aria-valuemax="100">
+                    <span class="summary-kpi__track" style="--target: 0.00%; --thumb: 0.00%;">
+                        <span class="summary-kpi__fill"></span>
+                        <span class="summary-kpi__thumb">
+                            <span class="summary-kpi__pct">0,0%</span>
+                        </span>
+                    </span>
+                </div>
+            </article>
+                    <article class="summary-kpi-card" style="--card-delay: 90ms; --bar-delay: 270ms;">
+                <div class="summary-kpi-card__main">
+                    <span class="summary-kpi-card__icon" aria-hidden="true">
+                        <i data-lucide="medal"></i>
+                    </span>
+
+                    <div class="summary-kpi-card__text">
+                        <span class="summary-kpi-card__label">
+                            Pontos                                                    </span>
+
+                        <div class="summary-kpi-card__stats">
+                            <span class="summary-kpi-card__stat">Atg: <strong>94,78</strong></span>
+                            <span class="summary-kpi-card__stat">Total: <strong>100</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-kpi__hitbar summary-kpi__hitbar--warn" role="progressbar" aria-valuenow="94.8" aria-valuemin="0" aria-valuemax="100">
+                    <span class="summary-kpi__track" style="--target: 94.78%; --thumb: 94.78%;">
+                        <span class="summary-kpi__fill"></span>
+                        <span class="summary-kpi__thumb">
+                            <span class="summary-kpi__pct">94,8%</span>
+                        </span>
+                    </span>
+                </div>
+            </article>
+                    <article class="summary-kpi-card" style="--card-delay: 180ms; --bar-delay: 360ms;">
+                <div class="summary-kpi-card__main">
+                    <span class="summary-kpi-card__icon" aria-hidden="true">
+                        <i data-lucide="banknote"></i>
+                    </span>
+
+                    <div class="summary-kpi-card__text">
+                        <span class="summary-kpi-card__label">
+                            Variável                                                            <span class="summary-kpi-card__label-emphasis">Estimada</span>
+                                                    </span>
+
+                        <div class="summary-kpi-card__stats">
+                            <span class="summary-kpi-card__stat">Atg: <strong>R$ 41,7 mil</strong></span>
+                            <span class="summary-kpi-card__stat">Total: <strong>R$ 45 mil</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-kpi__hitbar summary-kpi__hitbar--warn" role="progressbar" aria-valuenow="92.7" aria-valuemin="0" aria-valuemax="100">
+                    <span class="summary-kpi__track" style="--target: 92.67%; --thumb: 92.67%;">
+                        <span class="summary-kpi__fill"></span>
+                        <span class="summary-kpi__thumb">
+                            <span class="summary-kpi__pct">92,7%</span>
+                        </span>
+                    </span>
+                </div>
+            </article>
+            </div>
+</section>            <section class="summary-products-section" aria-label="Cards de indicadores" data-resumo-pane="cards">
+            <section class="summary-products-family">
+            <header class="summary-products-family__header">
+                <h2 class="summary-products-family__title">Credito</h2>
+                <span class="summary-products-family__meta">Pontos: 46,79 / 50</span>
+            </header>
+
+            <div class="summary-products-family__grid">
+                                                        <article class="summary-product-card" style="--card-delay: 0ms; --bar-delay: 200ms;" tabindex="0" data-tip-card>
+                        <div class="summary-product-card__title">
+                            <span class="summary-product-card__icon" aria-hidden="true">
+                                <i data-lucide="chart-line"></i>
+                            </span>
+                            <span class="summary-product-card__name" title="Credito Total">Credito Total</span>
+                            <button class="summary-product-card__badge summary-product-card__badge--warn" type="button" aria-label="Atingimento do indicador: 91,7%" aria-describedby="indicator-tooltip-101" data-tip-trigger>
+                                91,7%
+                            </button>
+                            <div class="summary-product-card__tooltip" id="indicator-tooltip-101" role="tooltip" data-tip>
+                                <h3 class="summary-product-card__tooltip-title">Resumo do indicador</h3>
+                                <div class="summary-product-card__tooltip-row"><span>Meta</span><strong>R$ 360.000,00</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Realizado</span><strong>R$ 330.000,00</strong></div>
+                                                                <div class="summary-product-card__tooltip-row"><span>Atingimento</span><strong>91,7%</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Pontos</span><strong>29,33 / 32</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Peso</span><strong>32</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Variável estimada</span><strong>R$ 21,5 mil</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Atualizado em</span><strong>05/04/2026</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__meta">
+                            <span class="summary-product-card__pill">Pontos: 29,33 / 32</span>
+                            <span class="summary-product-card__pill">Peso: 32</span>
+                            <span class="summary-product-card__pill">Valor</span>
+                        </div>
+
+                        <div class="summary-product-card__kpis">
+                            <div class="summary-product-card__kv">
+                                <small>Meta</small>
+                                <strong title="R$ 360.000,00">R$ 360 mil</strong>
+                            </div>
+                            <div class="summary-product-card__kv">
+                                <small>Realizado</small>
+                                <strong title="R$ 330.000,00">R$ 330 mil</strong>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__progress">
+                            <div class="summary-product-card__progress-head">
+                                <small>Atingimento de pontos</small>
+                            </div>
+
+                            <div class="summary-product-card__progress-body">
+                                <span class="summary-product-card__progress-goal">32 pts</span>
+                                <div class="summary-product-card__track summary-product-card__track--warn" role="progressbar" aria-valuenow="91.7" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="summary-product-card__fill" style="--target: 91.67%;"></span>
+                                    <span class="summary-product-card__progress-label" style="--target: 91.67%;">
+                                        <span class="summary-product-card__progress-value">91,7%</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__foot">Atualizado em 05/04/2026</div>
+                    </article>
+                                                        <article class="summary-product-card" style="--card-delay: 70ms; --bar-delay: 270ms;" tabindex="0" data-tip-card>
+                        <div class="summary-product-card__title">
+                            <span class="summary-product-card__icon" aria-hidden="true">
+                                <i data-lucide="chart-line"></i>
+                            </span>
+                            <span class="summary-product-card__name" title="Capital de Giro">Capital de Giro</span>
+                            <button class="summary-product-card__badge summary-product-card__badge--warn" type="button" aria-label="Atingimento do indicador: 97,0%" aria-describedby="indicator-tooltip-102" data-tip-trigger>
+                                97,0%
+                            </button>
+                            <div class="summary-product-card__tooltip" id="indicator-tooltip-102" role="tooltip" data-tip>
+                                <h3 class="summary-product-card__tooltip-title">Resumo do indicador</h3>
+                                <div class="summary-product-card__tooltip-row"><span>Meta</span><strong>R$ 165.000,00</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Realizado</span><strong>R$ 160.000,00</strong></div>
+                                                                <div class="summary-product-card__tooltip-row"><span>Atingimento</span><strong>97,0%</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Pontos</span><strong>17,45 / 18</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Peso</span><strong>18</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Variável estimada</span><strong>R$ 7,4 mil</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Atualizado em</span><strong>05/04/2026</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__meta">
+                            <span class="summary-product-card__pill">Pontos: 17,45 / 18</span>
+                            <span class="summary-product-card__pill">Peso: 18</span>
+                            <span class="summary-product-card__pill">Valor</span>
+                        </div>
+
+                        <div class="summary-product-card__kpis">
+                            <div class="summary-product-card__kv">
+                                <small>Meta</small>
+                                <strong title="R$ 165.000,00">R$ 165 mil</strong>
+                            </div>
+                            <div class="summary-product-card__kv">
+                                <small>Realizado</small>
+                                <strong title="R$ 160.000,00">R$ 160 mil</strong>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__progress">
+                            <div class="summary-product-card__progress-head">
+                                <small>Atingimento de pontos</small>
+                            </div>
+
+                            <div class="summary-product-card__progress-body">
+                                <span class="summary-product-card__progress-goal">18 pts</span>
+                                <div class="summary-product-card__track summary-product-card__track--warn" role="progressbar" aria-valuenow="97.0" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="summary-product-card__fill" style="--target: 96.97%;"></span>
+                                    <span class="summary-product-card__progress-label" style="--target: 96.97%;">
+                                        <span class="summary-product-card__progress-value">97,0%</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__foot">Atualizado em 05/04/2026</div>
+                    </article>
+                            </div>
+        </section>
+            <section class="summary-products-family">
+            <header class="summary-products-family__header">
+                <h2 class="summary-products-family__title">Relacionamento</h2>
+                <span class="summary-products-family__meta">Pontos: 26,59 / 28</span>
+            </header>
+
+            <div class="summary-products-family__grid">
+                                                        <article class="summary-product-card" style="--card-delay: 140ms; --bar-delay: 340ms;" tabindex="0" data-tip-card>
+                        <div class="summary-product-card__title">
+                            <span class="summary-product-card__icon" aria-hidden="true">
+                                <i data-lucide="chart-line"></i>
+                            </span>
+                            <span class="summary-product-card__name" title="Giro de Carteira">Giro de Carteira</span>
+                            <button class="summary-product-card__badge summary-product-card__badge--warn" type="button" aria-label="Atingimento do indicador: 94,9%" aria-describedby="indicator-tooltip-201" data-tip-trigger>
+                                94,9%
+                            </button>
+                            <div class="summary-product-card__tooltip" id="indicator-tooltip-201" role="tooltip" data-tip>
+                                <h3 class="summary-product-card__tooltip-title">Resumo do indicador</h3>
+                                <div class="summary-product-card__tooltip-row"><span>Meta</span><strong>88,33%</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Realizado</span><strong>83,87%</strong></div>
+                                                                    <div class="summary-product-card__tooltip-row"><span>Clientes com contato / Base da carteira</span><strong>260 / 310</strong></div>
+                                                                <div class="summary-product-card__tooltip-row"><span>Atingimento</span><strong>94,9%</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Pontos</span><strong>26,59 / 28</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Peso</span><strong>28</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Variável estimada</span><strong>R$ 8,8 mil</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Atualizado em</span><strong>05/04/2026</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__meta">
+                            <span class="summary-product-card__pill">Pontos: 26,59 / 28</span>
+                            <span class="summary-product-card__pill">Peso: 28</span>
+                            <span class="summary-product-card__pill">Percentual</span>
+                        </div>
+
+                        <div class="summary-product-card__kpis">
+                            <div class="summary-product-card__kv">
+                                <small>Meta</small>
+                                <strong title="88,33%">88,33%</strong>
+                            </div>
+                            <div class="summary-product-card__kv">
+                                <small>Realizado</small>
+                                <strong title="83,87%">83,87%</strong>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__progress">
+                            <div class="summary-product-card__progress-head">
+                                <small>Atingimento de pontos</small>
+                            </div>
+
+                            <div class="summary-product-card__progress-body">
+                                <span class="summary-product-card__progress-goal">28 pts</span>
+                                <div class="summary-product-card__track summary-product-card__track--warn" role="progressbar" aria-valuenow="94.9" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="summary-product-card__fill" style="--target: 94.95%;"></span>
+                                    <span class="summary-product-card__progress-label" style="--target: 94.95%;">
+                                        <span class="summary-product-card__progress-value">94,9%</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__foot">Atualizado em 05/04/2026</div>
+                    </article>
+                            </div>
+        </section>
+            <section class="summary-products-family">
+            <header class="summary-products-family__header">
+                <h2 class="summary-products-family__title">Seguros</h2>
+                <span class="summary-products-family__meta">Pontos: 21,41 / 22</span>
+            </header>
+
+            <div class="summary-products-family__grid">
+                                                        <article class="summary-product-card" style="--card-delay: 210ms; --bar-delay: 410ms;" tabindex="0" data-tip-card>
+                        <div class="summary-product-card__title">
+                            <span class="summary-product-card__icon" aria-hidden="true">
+                                <i data-lucide="chart-line"></i>
+                            </span>
+                            <span class="summary-product-card__name" title="Seguro Vida">Seguro Vida</span>
+                            <button class="summary-product-card__badge summary-product-card__badge--warn" type="button" aria-label="Atingimento do indicador: 97,3%" aria-describedby="indicator-tooltip-301" data-tip-trigger>
+                                97,3%
+                            </button>
+                            <div class="summary-product-card__tooltip" id="indicator-tooltip-301" role="tooltip" data-tip>
+                                <h3 class="summary-product-card__tooltip-title">Resumo do indicador</h3>
+                                <div class="summary-product-card__tooltip-row"><span>Meta</span><strong>37</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Realizado</span><strong>36</strong></div>
+                                                                <div class="summary-product-card__tooltip-row"><span>Atingimento</span><strong>97,3%</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Pontos</span><strong>21,41 / 22</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Peso</span><strong>22</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Variável estimada</span><strong>R$ 4 mil</strong></div>
+                                <div class="summary-product-card__tooltip-row"><span>Atualizado em</span><strong>05/04/2026</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__meta">
+                            <span class="summary-product-card__pill">Pontos: 21,41 / 22</span>
+                            <span class="summary-product-card__pill">Peso: 22</span>
+                            <span class="summary-product-card__pill">Quantidade</span>
+                        </div>
+
+                        <div class="summary-product-card__kpis">
+                            <div class="summary-product-card__kv">
+                                <small>Meta</small>
+                                <strong title="37">37</strong>
+                            </div>
+                            <div class="summary-product-card__kv">
+                                <small>Realizado</small>
+                                <strong title="36">36</strong>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__progress">
+                            <div class="summary-product-card__progress-head">
+                                <small>Atingimento de pontos</small>
+                            </div>
+
+                            <div class="summary-product-card__progress-body">
+                                <span class="summary-product-card__progress-goal">22 pts</span>
+                                <div class="summary-product-card__track summary-product-card__track--warn" role="progressbar" aria-valuenow="97.3" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="summary-product-card__fill" style="--target: 97.30%;"></span>
+                                    <span class="summary-product-card__progress-label" style="--target: 97.30%;">
+                                        <span class="summary-product-card__progress-value">97,3%</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="summary-product-card__foot">Atualizado em 05/04/2026</div>
+                    </article>
+                            </div>
+        </section>
+    </section>            <section class="summary-legacy" data-resumo-pane="legacy" hidden aria-label="Resumo em visão clássica">
+                    <section class="summary-legacy__section" data-legacy-section>
+            <header class="summary-legacy__head">
+                <div class="summary-legacy__heading">
+                    <div class="summary-legacy__title-row">
+                        <span class="summary-legacy__name">Credito</span>
+                    </div>
+
+                    <div class="summary-legacy__chips">
+                        <span class="summary-legacy__chip">2 indicadores</span>
+                        <span class="summary-legacy__chip">Pontos 46,79 / 50</span>
+                                            </div>
+                </div>
+
+                <div class="summary-legacy__stats">
+                    <div class="summary-legacy__stat">
+                        <span class="summary-legacy__stat-label">Peso total</span>
+                        <strong class="summary-legacy__stat-value">50</strong>
+                    </div>
+
+                    <div class="summary-legacy__stat">
+                        <span class="summary-legacy__stat-label">Atingimento</span>
+                        <strong class="summary-legacy__stat-value">94,3%</strong>
+                    </div>
+                </div>
+            </header>
+
+            <div class="summary-legacy__table-wrapper">
+                <table class="summary-legacy__table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Indicador</th>
+                            <th scope="col" class="summary-legacy__col--peso">Peso</th>
+                            <th scope="col">Métrica</th>
+                            <th scope="col" class="summary-legacy__col--meta">Meta</th>
+                            <th scope="col" class="summary-legacy__col--real">Realizado</th>
+                            <th scope="col" class="summary-legacy__col--pontos">Pontos</th>
+                            <th scope="col" class="summary-legacy__col--ating">Ating.</th>
+                            <th scope="col" class="summary-legacy__col--update">Atualização</th>
+                        </tr>
+                    </thead>
+
+                                                                    <tbody class="summary-legacy__group" data-legacy-group>
+                            <tr class="summary-legacy__row summary-legacy__row--parent">
+                                <td class="summary-legacy__col--prod">
+                                    <div class="summary-legacy__prod-cell">
+                                                                                    <span class="summary-legacy__expand-placeholder" aria-hidden="true"></span>
+                                        
+                                        <div class="summary-legacy__prod-stack">
+                                            <div class="summary-legacy__prod-name" title="Credito Total">Credito Total</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--peso">32</td>
+                                <td>
+                                    <span class="summary-legacy__metric summary-legacy__metric--valor">
+                                        Valor                                    </span>
+                                </td>
+                                <td class="summary-legacy__col--meta" title="R$ 360.000,00">R$ 360 mil</td>
+                                <td class="summary-legacy__col--real" title="R$ 330.000,00">
+                                    <div class="summary-legacy__cell-main">R$ 330 mil</div>
+                                </td>
+                                <td class="summary-legacy__col--pontos">29,33 / 32</td>
+                                <td class="summary-legacy__col--ating">
+                                    <div class="summary-legacy__ating-meter is-warn" style="--fill: 91.67%;" role="progressbar" aria-valuenow="91.7" aria-valuemin="0" aria-valuemax="100">
+                                        <span class="summary-legacy__ating-fill"></span>
+                                        <span class="summary-legacy__ating-value">91,7%</span>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--update">05/04/2026</td>
+                            </tr>
+
+                                                    </tbody>
+                                                                    <tbody class="summary-legacy__group" data-legacy-group>
+                            <tr class="summary-legacy__row summary-legacy__row--parent">
+                                <td class="summary-legacy__col--prod">
+                                    <div class="summary-legacy__prod-cell">
+                                                                                    <span class="summary-legacy__expand-placeholder" aria-hidden="true"></span>
+                                        
+                                        <div class="summary-legacy__prod-stack">
+                                            <div class="summary-legacy__prod-name" title="Capital de Giro">Capital de Giro</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--peso">18</td>
+                                <td>
+                                    <span class="summary-legacy__metric summary-legacy__metric--valor">
+                                        Valor                                    </span>
+                                </td>
+                                <td class="summary-legacy__col--meta" title="R$ 165.000,00">R$ 165 mil</td>
+                                <td class="summary-legacy__col--real" title="R$ 160.000,00">
+                                    <div class="summary-legacy__cell-main">R$ 160 mil</div>
+                                </td>
+                                <td class="summary-legacy__col--pontos">17,45 / 18</td>
+                                <td class="summary-legacy__col--ating">
+                                    <div class="summary-legacy__ating-meter is-warn" style="--fill: 96.97%;" role="progressbar" aria-valuenow="97.0" aria-valuemin="0" aria-valuemax="100">
+                                        <span class="summary-legacy__ating-fill"></span>
+                                        <span class="summary-legacy__ating-value">97,0%</span>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--update">05/04/2026</td>
+                            </tr>
+
+                                                    </tbody>
+                                    </table>
+            </div>
+        </section>
+                    <section class="summary-legacy__section" data-legacy-section>
+            <header class="summary-legacy__head">
+                <div class="summary-legacy__heading">
+                    <div class="summary-legacy__title-row">
+                        <span class="summary-legacy__name">Relacionamento</span>
+                    </div>
+
+                    <div class="summary-legacy__chips">
+                        <span class="summary-legacy__chip">1 indicadores</span>
+                        <span class="summary-legacy__chip">Pontos 26,59 / 28</span>
+                                                    <button class="summary-legacy__toggle-all" type="button" data-legacy-toggle-all aria-expanded="false">Abrir todos os filtros</button>
+                                            </div>
+                </div>
+
+                <div class="summary-legacy__stats">
+                    <div class="summary-legacy__stat">
+                        <span class="summary-legacy__stat-label">Peso total</span>
+                        <strong class="summary-legacy__stat-value">28</strong>
+                    </div>
+
+                    <div class="summary-legacy__stat">
+                        <span class="summary-legacy__stat-label">Atingimento</span>
+                        <strong class="summary-legacy__stat-value">94,9%</strong>
+                    </div>
+                </div>
+            </header>
+
+            <div class="summary-legacy__table-wrapper">
+                <table class="summary-legacy__table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Indicador</th>
+                            <th scope="col" class="summary-legacy__col--peso">Peso</th>
+                            <th scope="col">Métrica</th>
+                            <th scope="col" class="summary-legacy__col--meta">Meta</th>
+                            <th scope="col" class="summary-legacy__col--real">Realizado</th>
+                            <th scope="col" class="summary-legacy__col--pontos">Pontos</th>
+                            <th scope="col" class="summary-legacy__col--ating">Ating.</th>
+                            <th scope="col" class="summary-legacy__col--update">Atualização</th>
+                        </tr>
+                    </thead>
+
+                                                                    <tbody class="summary-legacy__group" data-legacy-group>
+                            <tr class="summary-legacy__row summary-legacy__row--parent">
+                                <td class="summary-legacy__col--prod">
+                                    <div class="summary-legacy__prod-cell">
+                                                                                    <button class="summary-legacy__expand" type="button" data-legacy-toggle-row aria-expanded="false" aria-label="Expandir subindicadores de Giro de Carteira">
+                                                <span class="summary-legacy__expand-icon" aria-hidden="true"></span>
+                                            </button>
+                                        
+                                        <div class="summary-legacy__prod-stack">
+                                            <div class="summary-legacy__prod-name" title="Giro de Carteira">Giro de Carteira</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--peso">28</td>
+                                <td>
+                                    <span class="summary-legacy__metric summary-legacy__metric--perc">
+                                        Percentual                                    </span>
+                                </td>
+                                <td class="summary-legacy__col--meta" title="88,33%">88,33%</td>
+                                <td class="summary-legacy__col--real" title="83,87%">
+                                    <div class="summary-legacy__cell-main">83,87%</div>
+                                </td>
+                                <td class="summary-legacy__col--pontos">26,59 / 28</td>
+                                <td class="summary-legacy__col--ating">
+                                    <div class="summary-legacy__ating-meter is-warn" style="--fill: 94.95%;" role="progressbar" aria-valuenow="94.9" aria-valuemin="0" aria-valuemax="100">
+                                        <span class="summary-legacy__ating-fill"></span>
+                                        <span class="summary-legacy__ating-value">94,9%</span>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--update">05/04/2026</td>
+                            </tr>
+
+                                                                                            <tr class="summary-legacy__row summary-legacy__row--sub" hidden data-legacy-child-row>
+                                    <td class="summary-legacy__col--prod">
+                                        <div class="summary-legacy__sub-name">Base da carteira</div>
+                                    </td>
+                                    <td class="summary-legacy__col--peso">-</td>
+                                    <td>
+                                        <span class="summary-legacy__metric summary-legacy__metric--qtd">
+                                            Quantidade                                        </span>
+                                    </td>
+                                    <td class="summary-legacy__col--meta">-</td>
+                                    <td class="summary-legacy__col--real" title="310">
+                                        <div class="summary-legacy__cell-main">310</div>
+                                    </td>
+                                    <td class="summary-legacy__col--pontos">-</td>
+                                    <td class="summary-legacy__col--ating">-</td>
+                                    <td class="summary-legacy__col--update">05/04/2026</td>
+                                </tr>
+                                                                                            <tr class="summary-legacy__row summary-legacy__row--sub" hidden data-legacy-child-row>
+                                    <td class="summary-legacy__col--prod">
+                                        <div class="summary-legacy__sub-name">Clientes com contato</div>
+                                    </td>
+                                    <td class="summary-legacy__col--peso">-</td>
+                                    <td>
+                                        <span class="summary-legacy__metric summary-legacy__metric--qtd">
+                                            Quantidade                                        </span>
+                                    </td>
+                                    <td class="summary-legacy__col--meta">-</td>
+                                    <td class="summary-legacy__col--real" title="260">
+                                        <div class="summary-legacy__cell-main">260</div>
+                                    </td>
+                                    <td class="summary-legacy__col--pontos">-</td>
+                                    <td class="summary-legacy__col--ating">-</td>
+                                    <td class="summary-legacy__col--update">05/04/2026</td>
+                                </tr>
+                                                    </tbody>
+                                    </table>
+            </div>
+        </section>
+                    <section class="summary-legacy__section" data-legacy-section>
+            <header class="summary-legacy__head">
+                <div class="summary-legacy__heading">
+                    <div class="summary-legacy__title-row">
+                        <span class="summary-legacy__name">Seguros</span>
+                    </div>
+
+                    <div class="summary-legacy__chips">
+                        <span class="summary-legacy__chip">1 indicadores</span>
+                        <span class="summary-legacy__chip">Pontos 21,41 / 22</span>
+                                            </div>
+                </div>
+
+                <div class="summary-legacy__stats">
+                    <div class="summary-legacy__stat">
+                        <span class="summary-legacy__stat-label">Peso total</span>
+                        <strong class="summary-legacy__stat-value">22</strong>
+                    </div>
+
+                    <div class="summary-legacy__stat">
+                        <span class="summary-legacy__stat-label">Atingimento</span>
+                        <strong class="summary-legacy__stat-value">97,3%</strong>
+                    </div>
+                </div>
+            </header>
+
+            <div class="summary-legacy__table-wrapper">
+                <table class="summary-legacy__table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Indicador</th>
+                            <th scope="col" class="summary-legacy__col--peso">Peso</th>
+                            <th scope="col">Métrica</th>
+                            <th scope="col" class="summary-legacy__col--meta">Meta</th>
+                            <th scope="col" class="summary-legacy__col--real">Realizado</th>
+                            <th scope="col" class="summary-legacy__col--pontos">Pontos</th>
+                            <th scope="col" class="summary-legacy__col--ating">Ating.</th>
+                            <th scope="col" class="summary-legacy__col--update">Atualização</th>
+                        </tr>
+                    </thead>
+
+                                                                    <tbody class="summary-legacy__group" data-legacy-group>
+                            <tr class="summary-legacy__row summary-legacy__row--parent">
+                                <td class="summary-legacy__col--prod">
+                                    <div class="summary-legacy__prod-cell">
+                                                                                    <span class="summary-legacy__expand-placeholder" aria-hidden="true"></span>
+                                        
+                                        <div class="summary-legacy__prod-stack">
+                                            <div class="summary-legacy__prod-name" title="Seguro Vida">Seguro Vida</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--peso">22</td>
+                                <td>
+                                    <span class="summary-legacy__metric summary-legacy__metric--qtd">
+                                        Quantidade                                    </span>
+                                </td>
+                                <td class="summary-legacy__col--meta" title="37">37</td>
+                                <td class="summary-legacy__col--real" title="36">
+                                    <div class="summary-legacy__cell-main">36</div>
+                                </td>
+                                <td class="summary-legacy__col--pontos">21,41 / 22</td>
+                                <td class="summary-legacy__col--ating">
+                                    <div class="summary-legacy__ating-meter is-warn" style="--fill: 97.30%;" role="progressbar" aria-valuenow="97.3" aria-valuemin="0" aria-valuemax="100">
+                                        <span class="summary-legacy__ating-fill"></span>
+                                        <span class="summary-legacy__ating-value">97,3%</span>
+                                    </div>
+                                </td>
+                                <td class="summary-legacy__col--update">05/04/2026</td>
+                            </tr>
+
+                                                    </tbody>
+                                    </table>
+            </div>
+        </section>
+    </section>                    </main>
+    </div>
+
+    <div class="global-loading-overlay" aria-live="polite" aria-busy="true" data-loading-overlay>
+        <div class="global-loading-overlay__panel">
+            <div class="global-loading-overlay__mark" aria-hidden="true">
+                <span class="global-loading-overlay__ring global-loading-overlay__ring--outer"></span>
+                <span class="global-loading-overlay__ring global-loading-overlay__ring--inner"></span>
+                <span class="global-loading-overlay__core"></span>
+            </div>
+            <strong class="global-loading-overlay__title">Atualizando painel</strong>
+            <span class="global-loading-overlay__copy" data-loading-text>Carregando dados do POBJ...</span>
+        </div>
+    </div>
+
+    <script src="assets/vendor/lucide.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

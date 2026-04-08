@@ -1,0 +1,28 @@
+TABLE_NAME	CONSTRAINT_TYPE	CONSTRAINT_NAME	COLUMN_NAME	REFERENCED_TABLE_NAME	REFERENCED_COLUMN_NAME
+dsubindicador	PRIMARY KEY	PRIMARY	id_subindicador	<NULL>	<NULL>
+dsubindicador	UNIQUE	uk_dsubindicador_indicador_nome	id_indicador	<NULL>	<NULL>
+dsubindicador	UNIQUE	uk_dsubindicador_indicador_nome	nome_subindicador	<NULL>	<NULL>
+dindicador	PRIMARY KEY	PRIMARY	id_indicador	<NULL>	<NULL>
+fmeta	PRIMARY KEY	PRIMARY	id_meta	<NULL>	<NULL>
+fmeta	UNIQUE	uk_fmeta_periodo_funcional_indicador	id_periodo	<NULL>	<NULL>
+fmeta	UNIQUE	uk_fmeta_periodo_funcional_indicador	funcional	<NULL>	<NULL>
+fmeta	UNIQUE	uk_fmeta_periodo_funcional_indicador	id_indicador	<NULL>	<NULL>
+frealizado	PRIMARY KEY	PRIMARY	id_producao	<NULL>	<NULL>
+frealizado	UNIQUE	uk_frealizado_periodo_funcional_indicador_sub	id_periodo	<NULL>	<NULL>
+frealizado	UNIQUE	uk_frealizado_periodo_funcional_indicador_sub	funcional	<NULL>	<NULL>
+frealizado	UNIQUE	uk_frealizado_periodo_funcional_indicador_sub	id_indicador	<NULL>	<NULL>
+frealizado	UNIQUE	uk_frealizado_periodo_funcional_indicador_sub	id_subindicador	<NULL>	<NULL>
+fdetalhe	PRIMARY KEY	PRIMARY	id_detalhe	<NULL>	<NULL>
+findicadorperiodo	PRIMARY KEY	PRIMARY	id_config_indicador_periodo	<NULL>	<NULL>
+findicadorperiodo	UNIQUE	uk_findicadorperiodo_periodo_indicador	id_periodo	<NULL>	<NULL>
+findicadorperiodo	UNIQUE	uk_findicadorperiodo_periodo_indicador	id_indicador	<NULL>	<NULL>
+fvariavel	PRIMARY KEY	PRIMARY	id_variavel	<NULL>	<NULL>
+fvariavel	UNIQUE	uk_fvariavel_periodo_funcional_indicador_data	id_periodo	<NULL>	<NULL>
+fvariavel	UNIQUE	uk_fvariavel_periodo_funcional_indicador_data	funcional	<NULL>	<NULL>
+fvariavel	UNIQUE	uk_fvariavel_periodo_funcional_indicador_data	id_indicador	<NULL>	<NULL>
+fvariavel	UNIQUE	uk_fvariavel_periodo_funcional_indicador_data	data_realizado	<NULL>	<NULL>
+fpontos	PRIMARY KEY	PRIMARY	id_ponto	<NULL>	<NULL>
+fpontos	UNIQUE	uk_fpontos_periodo_funcional_indicador_data	id_periodo	<NULL>	<NULL>
+fpontos	UNIQUE	uk_fpontos_periodo_funcional_indicador_data	funcional	<NULL>	<NULL>
+fpontos	UNIQUE	uk_fpontos_periodo_funcional_indicador_data	id_indicador	<NULL>	<NULL>
+fpontos	UNIQUE	uk_fpontos_periodo_funcional_indicador_data	data_realizado	<NULL>	<NULL>
